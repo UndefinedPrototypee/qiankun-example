@@ -14,6 +14,12 @@ cp -r ./sub-vue/dist/ ./dist/subapp/sub-vue/
 # sub-html子应用
 cp -r ./sub-html/dist/ ./dist/subapp/sub-html/
 
+# sub-angular子应用
+cp -r ./sub-angular/dist/ ./dist/subapp/sub-angular/
+
+# sub-umi子应用
+cp -r ./sub-umi/dist/ ./dist/subapp/sub-umi/
+
 # main基座
 cp -r ./main/dist/ ./dist/main/
 

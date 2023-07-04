@@ -1,5 +1,7 @@
 const { name } = require('../package.json')
 
+console.log('sub-vue:process.env.NODE_ENV=', process.env.NODE_ENV)
+
 module.exports = {
   publicPath: '/subapp/sub-vue',
   transpileDependencies: ['common'],
