@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
 import { registerMicroApps, start, setDefaultMountApp } from 'qiankun'
-import microApps from './micro-app'
 import 'nprogress/nprogress.css'
+import microApps from './micro-app'
+import App from './App.vue'
 
 Vue.config.productionTip = false
 
@@ -24,7 +24,7 @@ const apps = microApps.map(item => {
     ...item,
     loader
   }
-})
+}).slice(0, 1)
 
 registerMicroApps(apps, {
   beforeLoad: app => {

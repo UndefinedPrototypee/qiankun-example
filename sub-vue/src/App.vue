@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Vue2.x Home</router-link> |
+      <router-link to="/about">About Vue2.x</router-link>
     </div>
     <div>
       <p>当前处于<code>{{ isInQiankun ? 'qiankun' : '独立运行'}}</code>环境</p>
@@ -67,6 +67,7 @@ export default {
 
 #nav {
   padding: 30px;
+  background: #c2c3c4;
 }
 
 #nav a {

@@ -16,6 +16,7 @@ const microApps = [
     entry: process.env.VUE_APP_SUB_HTML,
     activeRule: '/sub-html'
   },
+  /*
   {
     name: 'sub-angular',
     entry: process.env.VUE_APP_SUB_ANGULAR,
@@ -25,6 +26,32 @@ const microApps = [
     name: 'sub-umi',
     entry: process.env.VUE_APP_SUB_UMI,
     activeRule: '/sub-umi'
+  },
+  */
+  {
+    name: 'sub-doctor',
+    entry: process.env.VUE_APP_SUB_DOCTOR,
+    activeRule: '/sub-doctor'
+  },
+  {
+    name: 'sub-nurse',
+    entry: process.env.VUE_APP_SUB_NURSE,
+    activeRule: '/sub-nurse'
+  },
+  {
+    name: 'sub-hospital',
+    entry: process.env.VUE_APP_SUB_HOSPITAL,
+    activeRule: '/sub-hospital'
+  },
+  {
+    name: 'sub-patient',
+    entry: process.env.VUE_APP_SUB_PATIENT,
+    activeRule: '/sub-patient'
+  },
+  {
+    name: 'sub-vue3',
+    entry: process.env.VUE_APP_SUB_VUE3,
+    activeRule: '/sub-vue3'
   }
 ]
 

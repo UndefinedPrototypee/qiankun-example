@@ -3,6 +3,7 @@ const { name } = require('../package.json')
 console.log('sub-vue:process.env.NODE_ENV=', process.env.NODE_ENV)
 
 module.exports = {
+  outputDir: '../dist/sub-vue',
   publicPath: '/subapp/sub-vue',
   transpileDependencies: ['common'],
   chainWebpack: config => config.resolve.symlinks(false),

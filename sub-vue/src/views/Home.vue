@@ -26,6 +26,8 @@ export default {
       value3: ''
     }
   },
+  created () {
+  },
   methods: {
     focus1 () {
       console.log('--focus1--')
