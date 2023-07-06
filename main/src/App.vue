@@ -7,20 +7,22 @@
       <div class="logo" @click="toHome">QIANKUN-EXAMPLE</div>
       <ul class="sub-apps-top">
         <li v-for="item in microApps" :class="{active: item.activeRule === current}" :key="item.name"
-            @click="goto(item)">{{ item.name }}</li>
+            @click="gotoMicroApp(item)">{{ item.name }}</li>
       </ul>
       <div class="userinfo">主应用的state：{{ JSON.stringify(state) }}</div>
     </div>
     <section class="main-content">
       <dl class="sub-apps-left">
-        <dd :class="['li', 'default-' + setDefaultFlag]" @click="setDefault">setDefault [{{ setDefaultFlag }}]</dd>
-        <dd class="li opt-micro" @click="loadCurrentMicro()">load micro doctor</dd>
-        <dd class="li opt-micro" @click="unmountDoctor">unmount doctor</dd>
+        <dd :class="['li', 'default-' + setDefaultFlag]" @click="setDefault"><button>setDefault [{{ setDefaultFlag }}]</button></dd>
+        <dd class="li opt-micro" @click="loadDoctorMicro"><button>load micro doctor</button></dd>
+        <dd class="li opt-micro" @click="unmountDoctor"><button>unmount doctor</button></dd>
         <dd :class="['li', !!microAppState[item.name] ? 'app-mounted' : '' ]" v-for="item in microApps" :key="item.name"
             @click="clickMicroApp(item)"
             >{{ !!microAppState[item.name] ? 'unmount' : 'load' }} {{ item.name }}</dd>
       </dl>
-      <div id="subapp-viewport"></div>
+      <div :class="isSetDefault ? '' : 'main-frame'" id="subapp-viewport">
+        {{ isSetDefault ? '' : '没有setDefalutMicro,展示主框架' }}
+      </div>
     </section>
   </div>
 </template>
@@ -37,7 +39,7 @@ export default {
     return {
       isLoading: true,
       microApps,
-      setDefaultFlag: 'on',
+      setDefaultFlag: localStorage.getItem('set_default_mount_app') || 'on',
       instance: null,
       loadedAppMap: new Map(),
       microAppState: {},
@@ -53,6 +55,9 @@ export default {
 
       // 返回所有的state则不需添加参数
       return store.getGlobalState()
+    },
+    isSetDefault () {
+      return localStorage.getItem('set_default_mount_app') === 'on'
     }
   },
   watch: {
@@ -71,6 +76,9 @@ export default {
     setDefault () {
       this.setDefaultFlag = localStorage.getItem('set_default_mount_app') === 'on' ? 'off' : 'on'
       localStorage.setItem('set_default_mount_app', this.setDefaultFlag)
+      if (this.setDefaultFlag) {
+        this.gotoMicroApp(microApps[0])
+      }
     },
     toHome () {
       console.log(this)
@@ -89,32 +97,28 @@ export default {
       } else {
         this.loadedAppMap.set(item.name, loadMicroApp(item))
         console.log('load micro app, appName=', item.name, this.loadedAppMap.get(item.name))
+        this.gotoMicroApp(item)
       }
-      const arr = Array.from(this.loadedAppMap)
-      this.microAppState = arr.reduce((pre, next) => {
+      const loadedApps = Array.from(this.loadedAppMap)
+      this.microAppState = loadedApps.reduce((pre, next) => {
         const [name, instance] = next
         pre[name] = instance
         return pre
       }, {})
-      console.log('===>', this.microAppState)
+      console.log('===> load state ', this.microAppState)
     },
-    loadCurrentMicro (item) {
+    loadDoctorMicro (item) {
       const app = microApps[3]
       this.instanceDoctor = loadMicroApp(app)
-      // this.instance2 = loadMicroApp(microApps[2])
+      this.gotoMicroApp(app)
       console.log('loadOneMicro this.instance', this.instanceDoctor)
     },
-    ummountApp (item) {
-      console.log('ummountApp this.instance', this.instanceDoctor)
-      this.instanceDoctor.unmount()
-    },
-    unmountNurse () {
-      // this.instance.unmount()
-    },
     unmountDoctor () {
-      this.instanceDoctor.unmount()
+      this.instanceDoctor && this.instanceDoctor.unmount()
+      console.log('ummountApp this.instance', this.instanceDoctor)
     },
-    goto (item) {
+    gotoMicroApp (item) {
+      console.log('--history.pushState(null, item.activeRule, item.activeRule)', item)
       history.pushState(null, item.activeRule, item.activeRule)
       // this.current = item.name
     },
@@ -146,6 +150,8 @@ export default {
       })
     }
   },
+  beforeCreate () {
+  },
   created () {
     this.bindCurrent()
     NProgress.start()
@@ -162,7 +168,7 @@ html, body{
   padding: 0;
 }
 .opt-micro {
-  background: #1976d2;
+  background: #b1bfcc;
   color: white;
 }
 .default-on {
@@ -171,6 +177,10 @@ html, body{
 }
 .default-off {
   background: #c2c3c4;
+}
+.main-frame {
+  text-align: center;
+  padding: 100px 0;
 }
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
   .layout-wrapper{
@@ -225,6 +235,12 @@ html, body{
           background: chocolate;
         }
       }
+    }
+    .li button {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      box-sizing: border-box;
     }
   }
 </style>

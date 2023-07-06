@@ -7,6 +7,9 @@
     <div>
       <p>当前处于<code>{{ isInQiankun ? 'qiankun' : '独立运行'}}</code>环境</p>
       <p>vuex的`global module`的user state：<code> {{ JSON.stringify(user) }}</code></p>
+      <p>—— 验证点：totalJSHeapSize= {{ memory.totalJSHeapSize }} (B),,, {{ parseInt(memory.totalJSHeapSize / 1024 ** 2) }} (MB) ——</p>
+      <p>—— 验证点：jsHeapSizeLimit= {{ memory.jsHeapSizeLimit }} (B),,, {{ parseInt(memory.jsHeapSizeLimit / 1024 ** 2) }} (MB) ——</p>
+      <p>—— 验证点：usedJSHeapSize= {{ memory.usedJSHeapSize }} (B),,, {{ parseInt(memory.usedJSHeapSize / 1024 ** 2) }} (MB) ——</p>
     </div>
     <div class="btns">
       <template v-if="isInQiankun">
@@ -29,6 +32,13 @@ export default {
     }),
     isInQiankun () {
       return window.__POWERED_BY_QIANKUN__
+    },
+    memory () {
+      return {
+        jsHeapSizeLimit: performance.memory.jsHeapSizeLimit,
+        totalJSHeapSize: performance.memory.totalJSHeapSize,
+        usedJSHeapSize: performance.memory.usedJSHeapSize
+      }
     }
   },
   methods: {
