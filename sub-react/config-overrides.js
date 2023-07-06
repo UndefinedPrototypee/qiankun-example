@@ -1,3 +1,4 @@
+const path = require('path')
 const { name } = require('./package.json');
 console.log(name)
 
@@ -7,6 +8,7 @@ module.exports = {
       (e) => !e.includes('webpackHotDevClient')
     );
 
+    config.output.path = path.resolve(__dirname, '../dist/sub-react'),
     config.output.library = `${name}-[name]`;
     config.output.libraryTarget = 'umd';
     config.output.jsonpFunction = `webpackJsonp_${name}`;

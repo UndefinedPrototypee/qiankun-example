@@ -36,7 +36,6 @@ function render (props = {}) {
     }
     return JSON.stringify(arr)
   })()
-  console.log('size instance.testVar', instance.testVar)
   console.log('size instance.testVar.length', JSON.stringify(instance.testVar).length / 1024 ** 2, '(mb)')
 }
 
