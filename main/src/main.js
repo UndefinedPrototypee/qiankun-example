@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import { registerMicroApps, start, setDefaultMountApp } from 'qiankun'
 import 'nprogress/nprogress.css'
-import microApps from './micro-app'
 import App from './App.vue'
+import { registerMicroApps, setDefaultMountApp, start } from 'qiankun'
+import microApps from '@/micro-app'
 
 Vue.config.productionTip = false
 
@@ -24,27 +24,29 @@ const apps = microApps.map(item => {
     ...item,
     loader
   }
-}).slice(0, 1)
-
-registerMicroApps(apps, {
-  beforeLoad: app => {
-    console.log('before load app.name====>>>>>', app.name)
-  },
-  beforeMount: [
-    app => {
-      console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name)
-    }
-  ],
-  afterMount: [
-    app => {
-      console.log('[LifeCycle] after mount %c%s', 'color: green;', app.name)
-    }
-  ],
-  afterUnmount: [
-    app => {
-      console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name)
-    }
-  ]
 })
-setDefaultMountApp('/sub-vue')
-start()
+
+if (localStorage.getItem('set_default_mount_app') === 'on') {
+  registerMicroApps(apps.slice(0, 1), {
+    beforeLoad: app => {
+      console.log('before load app.name====>>>>>', app.name)
+    },
+    beforeMount: [
+      app => {
+        console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name)
+      }
+    ],
+    afterMount: [
+      app => {
+        console.log('[LifeCycle] after mount %c%s', 'color: green;', app.name)
+      }
+    ],
+    afterUnmount: [
+      app => {
+        console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name)
+      }
+    ]
+  })
+  setDefaultMountApp('/sub-vue')
+  start({ sandbox: false })
+}
