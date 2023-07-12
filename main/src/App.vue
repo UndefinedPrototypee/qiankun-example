@@ -9,7 +9,7 @@
         <li v-for="item in microApps" :class="{active: item.activeRule === current}" :key="item.name"
             @click="gotoMicroApp(item)">{{ item.name }}</li>
       </ul>
-      <div class="userinfo">主应用的state：{{ JSON.stringify(state) }}</div>
+      <div class="userinfo" @click="queryMainState">主应用的state</div>
     </div>
     <section class="main-content">
       <dl class="sub-apps-left">
@@ -84,7 +84,7 @@ export default {
       console.log(this)
       location.href = '/'
     },
-    clickMicroApp (item) {
+    async clickMicroApp (item) {
       const appInstance = this.loadedAppMap.get(item.name)
       if (appInstance) {
         console.warn('unmount micro app, appName=', appInstance.name, appInstance)
@@ -148,6 +148,9 @@ export default {
         window.removeEventListener('pushState', this.bindCurrent)
         window.removeEventListener('popstate', this.bindCurrent)
       })
+    },
+    queryMainState () {
+      window.alert(JSON.stringify(this.state))
     }
   },
   beforeCreate () {

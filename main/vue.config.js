@@ -4,6 +4,9 @@ module.exports = {
   outputDir: '../dist/main',
   publicPath: '/',
   transpileDependencies: ['common'],
+  devServer: {
+    port: 8888
+  },
   chainWebpack: config => {
     config.plugin('html')
       .tap((args) => {
@@ -11,6 +14,7 @@ module.exports = {
         return args
       })
   },
+  lintOnSave: false,
   configureWebpack: {
     optimization: {
       minimizer: [
