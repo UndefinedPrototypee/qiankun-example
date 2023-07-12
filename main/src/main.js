@@ -50,4 +50,12 @@ if (localStorage.getItem('set_default_mount_app') === 'on') {
   })
   setDefaultMountApp('/sub-vue')
   start({ sandbox: false })
+  setTimeout(() => {
+    console.log('-----0-setDefaultMountApp-------')
+    setDefaultMountApp('/sub-vue')
+  }, 3000)
+  setTimeout(() => {
+    console.log('-----0-start-------')
+    start({ sandbox: false })
+  }, 6000)
 }

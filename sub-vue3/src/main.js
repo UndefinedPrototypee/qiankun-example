@@ -19,7 +19,7 @@ function render(props = {}) {
     routes,
   });
 
-  const instance = createApp(App);
+  instance = createApp(App);
   instance.use(router);
   instance.use(store);
   instance.mount(container ? container.querySelector('#app') : '#app');
