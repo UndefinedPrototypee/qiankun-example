@@ -216,6 +216,7 @@ html, body{
       }
       .userinfo{
         position: absolute;
+        cursor: pointer;
         right: 100px;
         top: 0;
       }
@@ -225,12 +226,12 @@ html, body{
       grid-template-columns: 15% 85%;
       flex-grow: 1;
       .sub-apps-left {
-        padding: 10px 0;
+        padding: 6px 0;
         cursor: pointer;
         border-right: 1px solid;
         .li {
           text-align: center;
-          line-height: 60px;
+          line-height: 55px;
           border: 1px solid gainsboro;
         }
         .app-mounted {

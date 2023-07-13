@@ -12,8 +12,9 @@ let history = null;
 
 function render(props = {}) {
   const { container } = props;
-  const base = ['7782', '7783', '7784', '7785'].includes(location.port) ? '/subapp/vue-vue3' : '/subapp/vue-vue3'
-  const history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '' : base);
+  const base = ['7782', '7783', '7784', '7785'].includes(location.port) ? '/subapp/vue-vue3' : ''
+  history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/vue-vue3' : base || '');
+  console.log('---vue3 history ---', process.env.BASE_URL, history)
   router = createRouter({
     history,
     routes,

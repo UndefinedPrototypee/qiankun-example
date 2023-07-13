@@ -37,7 +37,7 @@ module.exports = {
     }
   },
   devServer: {
-    port: process.env.VUE_APP_PORT,
+    port: '8088',
     headers: {
       'Access-Control-Allow-Origin': '*'
     }

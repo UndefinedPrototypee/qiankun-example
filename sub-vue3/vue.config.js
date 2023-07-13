@@ -11,7 +11,7 @@ const port = 7782;
 module.exports = {
   outputDir: '../dist/vue-vue3',
   assetsDir: 'static',
-  publicPath: '/subapp/vue-vue3',
+  publicPath: '/subapp/',
   filenameHashing: true,
   devServer: {
     hot: true,
@@ -31,6 +31,12 @@ module.exports = {
       alias: {
         '@': resolve('src'),
       },
+    },
+    output: {
+      // 把子应用打包成 umd 库格式
+      library: `${name}-[name]`,
+      libraryTarget: 'umd',
+      jsonpFunction: `webpackJsonp_${name}`,
     },
     optimization: {
       minimizer: [

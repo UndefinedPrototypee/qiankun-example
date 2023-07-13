@@ -49,19 +49,26 @@ const microApps = [
     activeRule: '/sub-patient'
   },
   {
-    name: 'sub-vue3',
+    name: 'vue-vue3',
     entry: process.env.VUE_APP_SUB_VUE3,
-    activeRule: '/sub-vue3'
+    activeRule: '/vue-vue3'
   },
   {
     name: 'sub-order',
     entry: process.env.VUE_APP_SUB_ORDER,
     activeRule: '/sub-order'
   },
+  // 未实现 qiankun lifestyles
   {
     name: 'sub-guide',
     entry: '//172.16.6.214/ark/guide',
     activeRule: '/guide'
+  },
+  // 源：*/github/qiankun-master/vue3
+  {
+    name: 'vue3',
+    entry: 'http://172.23.18.87:7105/',
+    activeRule: '/vue3'
   }
 ]
 
