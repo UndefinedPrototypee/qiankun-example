@@ -9,14 +9,12 @@ module.exports = {
   transpileDependencies: ['common'],
   chainWebpack: config => config.resolve.symlinks(false),
   configureWebpack: {
-    /*
-   output: {
+    output: {
       // 把子应用打包成 umd 库格式
       library: `${name}-[name]`,
       libraryTarget: 'umd',
       jsonpFunction: `webpackJsonp_${name}`
     },
-    */
     optimization: {
       minimizer: [
         new UglifyJsPlugin({

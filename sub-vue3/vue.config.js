@@ -11,7 +11,7 @@ const port = 7782;
 module.exports = {
   outputDir: '../dist/vue-vue3',
   assetsDir: 'static',
-  publicPath: '/subapp/',
+  publicPath: '/subapp/vue-vue3',
   filenameHashing: true,
   devServer: {
     hot: true,
